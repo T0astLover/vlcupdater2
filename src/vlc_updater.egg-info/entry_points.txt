@@ -1,0 +1,2 @@
+[console_scripts]
+vlc-updater = vlc_updater.cli:main

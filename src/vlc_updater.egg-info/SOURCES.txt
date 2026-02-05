@@ -1,0 +1,12 @@
+README.md
+pyproject.toml
+src/vlc_updater/__init__.py
+src/vlc_updater/checker.py
+src/vlc_updater/cli.py
+src/vlc_updater/db.py
+src/vlc_updater.egg-info/PKG-INFO
+src/vlc_updater.egg-info/SOURCES.txt
+src/vlc_updater.egg-info/dependency_links.txt
+src/vlc_updater.egg-info/entry_points.txt
+src/vlc_updater.egg-info/top_level.txt
+tests/test_checker.py
