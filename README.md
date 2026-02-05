@@ -1,0 +1,76 @@
+# VLC Updater (Python + SQLite)
+
+Et lite Python-prosjekt som sjekker om **VLC** har fått en ny versjon, og lagrer alle sjekker i en SQLite-database.
+
+## Hva programmet gjør
+
+- Leser siste tilgjengelige VLC-versjon fra en kilde-URL (default: `https://www.videolan.org/vlc/`).
+- Sammenligner med versjonen dere oppgir som lokalt installert.
+- Lagrer resultat (ok/feil, tidspunkt, versjoner osv.) i SQLite.
+- Lar dere hente historikk for revisjon/sporing.
+
+> Merk: I noen miljøer kan videolan.org blokkere trafikk. Da vil sjekken lagres med `status=error` og feilmelding.
+
+## Krav
+
+- Python 3.10+
+
+## Rask oppstart
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+pip install -e .
+```
+
+Opprett database:
+
+```bash
+vlc-updater init-db
+```
+
+Kjør en sjekk:
+
+```bash
+vlc-updater check --installed-version 3.0.20
+```
+
+Vis historikk:
+
+```bash
+vlc-updater history --limit 10
+```
+
+## Eksempel på output
+
+```json
+{
+  "created_at": "2026-02-05T08:00:00+00:00",
+  "product": "vlc",
+  "installed_version": "3.0.20",
+  "latest_version": "3.0.21",
+  "update_available": 1,
+  "source_url": "https://www.videolan.org/vlc/",
+  "status": "ok",
+  "error_message": null,
+  "id": 1
+}
+```
+
+## Forslag til GitHub-oppsett
+
+1. Opprett nytt repo på GitHub, for eksempel `kunst-og-arkitektur/vlc-updater`.
+2. Push denne koden:
+
+```bash
+git init
+git add .
+git commit -m "Initial version of VLC updater"
+git branch -M main
+git remote add origin git@github.com:<ORG_ELLER_BRUKER>/vlc-updater.git
+git push -u origin main
+```
+
+## Automatisering (valgfritt)
+
+Kjør `vlc-updater check` via cron/Task Scheduler daglig, så får dere løpende historikk i databasen.
